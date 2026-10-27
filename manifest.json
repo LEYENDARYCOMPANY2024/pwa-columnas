@@ -1,0 +1,46 @@
+{
+  "name": "Calculadora de varilla para columnas",
+  "short_name": "Varilla",
+  "description": "Cuantía de acero y materiales para columnas de concreto",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#e6e3dc",
+  "theme_color": "#1f2a33",
+  "lang": "es",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "widgets": [
+    {
+      "name": "Varilla para columnas",
+      "short_name": "Varilla",
+      "description": "Cuantía de acero y materiales de la última columna calculada",
+      "tag": "varilla-columnas",
+      "template": "varilla-columnas",
+      "ms_ac_template": "widgets/card.json",
+      "data": "widgets/widget-data.json",
+      "type": "application/json",
+      "screenshots": [
+        {
+          "src": "widgets/widget-preview.png",
+          "sizes": "600x400",
+          "label": "Widget de cuantía y materiales para columnas"
+        }
+      ],
+      "auth": false,
+      "multiple": false
+    }
+  ]
+}

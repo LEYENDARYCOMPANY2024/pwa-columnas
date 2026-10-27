@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="es"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Varilla para columnas</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#1f2a33">
+<link rel="apple-touch-icon" href="icon-192.png">
+<style>
+:root{--bg:#e6e3dc;--card:#f4f2ed;--ink:#1f2a33;--mut:#5d6870;--acc:#f2c230;--ok:#2f7d4f;--bad:#b3341f;--line:#c9c5bb}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#161d23;--card:#1f2a33;--ink:#ece9e1;--mut:#9aa5ad;--line:#33414c;--ok:#5fc18a;--bad:#ff8b74}}
+:root[data-theme=dark]{--bg:#161d23;--card:#1f2a33;--ink:#ece9e1;--mut:#9aa5ad;--line:#33414c;--ok:#5fc18a;--bad:#ff8b74}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 "Segoe UI",system-ui,sans-serif;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
+header{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;background:#1f2a33;color:#ece9e1;padding:20px 16px 18px;border-bottom:6px solid var(--acc)}
+.head-actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+h1{margin:0;font:700 1.6rem/1.1 "Arial Narrow","Roboto Condensed",sans-serif;letter-spacing:.01em}
+header p{margin:6px 0 0;color:#aab4bb;font-size:.9rem}
+main{max-width:760px;margin:0 auto;padding:16px;display:grid;gap:16px}
+section{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:16px}
+h2{margin:0 0 12px;font-size:1.05rem}
+.g{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+label{display:block;font-size:.85rem;color:var(--mut)}
+input,select{width:100%;margin-top:4px;padding:10px;font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:4px}
+input:focus,select:focus,button:focus-visible{outline:3px solid var(--acc);outline-offset:1px}
+.big{font:700 2.2rem/1 "Arial Narrow",sans-serif}
+.row{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px solid var(--line)}
+.row:last-child{border:0}.row b{text-align:right}
+.badge{display:inline-block;padding:3px 10px;border-radius:3px;font-weight:700;font-size:.85rem;color:#fff}
+.ok{background:var(--ok)}.bad{background:var(--bad)}
+.warn{border-left:4px solid var(--acc);padding:8px 12px;margin-top:10px;background:var(--bg);font-size:.9rem}
+.bar{height:14px;background:var(--bg);border:1px solid var(--line);border-radius:3px;position:relative;margin:10px 0 4px;overflow:hidden}
+.bar i{position:absolute;inset:0 auto 0 0;background:var(--ink)}
+.zone{position:absolute;top:0;bottom:0;background:rgba(242,194,48,.45)}
+button.sec{background:transparent;color:var(--ink);border:1px solid var(--ink)}
+.st{display:flex;gap:6px;margin-top:4px}.st input{margin:0;text-align:center}.st button{margin:0;width:44px;padding:0;font-size:1.3rem}
+.btns{display:flex;gap:10px;flex-wrap:wrap}header button{margin:0;padding:8px 12px;font-size:.85rem}
+#th{background:#f2c230;color:#1f2a33}
+#fs{background:#54c6a1;color:#12352b}
+#cp{background:#7db9e8;color:#152b3c}
+#ex{background:#8fcf7a;color:#1e3520}
+#tx{background:#f0a28f;color:#3b211c}
+header button:disabled{cursor:not-allowed;opacity:.6}
+small{color:var(--mut)}
+button{margin-top:12px;padding:10px 14px;font:inherit;font-weight:600;background:var(--acc);color:#1f2a33;border:0;border-radius:4px;cursor:pointer}
+@media(max-width:420px){.g{grid-template-columns:1fr}header{flex-wrap:wrap}.head-actions{margin-left:auto}}
+</style></head><body>
+<header><div><h1>Varilla para columnas</h1><p>Cuantía de acero y lista de materiales</p></div><div class="head-actions"><button id="th" type="button" aria-label="Cambiar tema">Tema</button><button id="fs" type="button">Pantalla completa</button><button id="cp" type="button">Compartir</button><button id="ex" type="button">Excel</button><button id="tx" type="button">TXT</button></div></header>
+<main>
+<section><h2>Columna</h2><div class="g">
+<label>Ancho (cm)<input id="b" type="number" inputmode="decimal" value="20" min="10"></label>
+<label>Largo (cm)<input id="h" type="number" inputmode="decimal" value="30" min="10"></label>
+<label>Altura de la columna (m)<input id="H" type="number" inputmode="decimal" value="4" step="0.1"></label>
+<label>Número de columnas<input id="N" type="number" inputmode="numeric" value="1" min="1"></label>
+<label>Recubrimiento (cm)<input id="r" type="number" inputmode="decimal" value="2.5" step="0.5"></label>
+<label>Desperdicio (%)<input id="w" type="number" inputmode="decimal" value="10"></label>
+</div></section>
+<section><h2>Acero</h2><div class="g">
+<label>Varilla longitudinal<select id="vd">
+<option value="3">#3 · 3/8" · 0.71 cm²</option>
+<option value="4" selected>#4 · 1/2" · 1.27 cm²</option>
+<option value="5">#5 · 5/8" · 1.98 cm²</option>
+<option value="6">#6 · 3/4" · 2.85 cm²</option></select></label>
+<label>Cantidad de varillas<div class="st"><button type="button" id="mn" aria-label="Menos varillas">−</button><input id="nv" type="number" inputmode="numeric" value="6" min="4"><button type="button" id="pl" aria-label="Más varillas">+</button></div></label>
+<label>Estribo<select id="ed">
+<option value="2">#2 · 1/4"</option><option value="2.5" selected>#2.5 · 5/16"</option><option value="3">#3 · 3/8"</option></select></label>
+<label>Separación de estribos (cm)<input id="s" type="number" inputmode="decimal" value="20"></label>
+<label>Longitud comercial<select id="L"><option value="6">6 m</option><option value="9">9 m</option><option value="12" selected>12 m</option></select></label>
+<label>Precio por kg ($, opcional)<input id="pr" type="number" inputmode="decimal" value="0" min="0"></label>
+</div></section>
+<section id="res1"></section>
+<section id="res2"></section>
+<section><small>Cálculo referencial con el criterio de cuantía del 1 % al 8 % del área de la sección. No sustituye el cálculo estructural de un ingeniero, que define la carga, el sismo y los traslapes.</small>
+<p><small>Widget de Windows 11: instala esta PWA desde Microsoft Edge; después abre Widgets con Win+W y elige «Agregar widgets».</small></p>
+<div class="btns"><button id="rs" type="button" class="sec">Restablecer valores</button><button id="inst" hidden>Instalar app</button></div></section>
+</main>
+<script>
+const A={3:.71,4:1.27,5:1.98,6:2.85},D={3:.9525,4:1.27,5:1.5875,6:1.905};
+const WV={3:.56,4:.994,5:1.552,6:2.235},WE={2:.249,2.5:.384,3:.56};
+const $=i=>document.getElementById(i),ids=['b','h','H','N','r','w','vd','nv','ed','s','L','pr'];
+const f=(n,d=2)=>n.toLocaleString('es-MX',{maximumFractionDigits:d});
+function getResults(v){
+ const at=v.b*v.h,amin=at*.01,amax=at*.08,ab=A[v.vd],as=ab*v.nv,q=at?as/at*100:0;
+ const nmin=Math.max(4,Math.ceil(amin/ab)),ok=q>=1&&q<=8&&v.nv>=4;
+ const k=1+v.w/100,ml=v.H*v.nv*v.N,pz=Math.ceil(ml*k/v.L);
+ const ph=2*(v.b-2*v.r)+2*(v.h-2*v.r)+2*10,ne=Math.ceil(v.H*100/v.s)+1;
+ const me=ph/100*ne*v.N,pe=Math.ceil(me*k/v.L);
+ const kg=ml*k*WV[v.vd]+me*k*WE[v.ed];
+ return{at,amin,amax,ab,as,q,nmin,ok,k,ml,pz,ph,ne,me,pe,kg};
+}
+function calc(){
+ const v={};ids.forEach(i=>v[i]=parseFloat($(i).value)||0);
+ try{localStorage.setItem('varilla',JSON.stringify(v))}catch(e){}
+ const{at,amin,amax,ab,as,q,nmin,ok,k,ml,pz,ph,ne,me,pe,kg}=getResults(v);
+ const pct=Math.min(q/10*100,100);
+ let w='';
+ if(v.vd==3)w+='<div class="warn">La varilla #3 (3/8") suele ser insuficiente como refuerzo longitudinal principal; se prefiere #4 (1/2") como mínimo.</div>';
+ if(v.nv<4)w+='<div class="warn">Una columna rectangular lleva al menos 4 varillas, una por esquina.</div>';
+ if(q<1)w+=`<div class="warn">Faltan varillas: con ${v.vd==3?'#3':'esta varilla'} necesitas al menos ${nmin}.</div>`;
+ if(q>8)w+='<div class="warn">Pasa del 8 %: aumenta la sección o usa menos varillas.</div>';
+ $('res1').innerHTML=`<h2>Cuantía de acero</h2>
+ <div class="big">${f(q)} % <span class="badge ${ok?'ok':'bad'}">${ok?'Cumple':'No cumple'}</span></div>
+ <div class="bar" aria-hidden="true"><div class="zone" style="left:10%;width:70%"></div><i style="width:${pct}%"></i></div>
+ <small>Rango permitido de 1 % a 8 %</small>
+ <div class="row"><span>Área de la columna</span><b>${f(at)} cm²</b></div>
+ <div class="row"><span>Acero mínimo (1 %)</span><b>${f(amin)} cm²</b></div>
+ <div class="row"><span>Acero máximo (8 %)</span><b>${f(amax)} cm²</b></div>
+ <div class="row"><span>Acero colocado (${v.nv} × ${ab} cm²)</span><b>${f(as)} cm²</b></div>
+ <div class="row"><span>Varillas mínimas con esta medida</span><b>${nmin}</b></div>${w}`;
+ $('res2').innerHTML=`<h2>Material a comprar</h2>
+ <div class="row"><span>Varilla longitudinal</span><b>${f(ml)} m</b></div>
+ <div class="row"><span>Con ${f(v.w,0)} % de desperdicio</span><b>${f(ml*k)} m</b></div>
+ <div class="row"><span>Piezas de ${f(v.L,0)} m</span><b>${pz}</b></div>
+ <div class="row"><span>Perímetro del estribo (con ganchos)</span><b>${f(ph,1)} cm</b></div>
+ <div class="row"><span>Estribos por columna</span><b>${ne}</b></div>
+ <div class="row"><span>Varilla para estribos</span><b>${f(me)} m</b></div>
+ <div class="row"><span>Piezas de estribo (con desperdicio)</span><b>${pe}</b></div>
+ ${v.pr>0?`<div class="row"><span>Peso total (varilla + estribos)</span><b>${f(kg)} kg</b></div><div class="row"><span>Costo estimado</span><b>$${f(kg*v.pr)}</b></div>`:''}
+ <small>Estribos: perímetro por el recubrimiento, más 10 cm por gancho en cada extremo.</small>`;
+ if('serviceWorker'in navigator){
+  const widgetData={
+   dimensions:`${f(v.b,1)} × ${f(v.h,1)} cm · ${f(v.H,1)} m · ${f(v.N,0)} columna(s)`,
+   ratio:`${f(q)} %`,
+   status:ok?'Cumple':'No cumple',
+   statusColor:ok?'good':'attention',
+   longitudinal:`${pz} piezas de ${f(v.L,0)} m`,
+   stirrups:`${ne} por columna · ${pe} piezas`
+  };
+  navigator.serviceWorker.ready.then(registration=>{
+   if(!registration.active)throw new Error('El service worker de la PWA no está activo.');
+   registration.active.postMessage({type:'update-column-widget',data:widgetData});
+  });
+ }
+}
+function xmlEscape(value){
+ return String(value).replace(/[<>&'"]/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;',"'":'&apos;','"':'&quot;'}[c]));
+}
+function columnName(n){
+ let name='';
+ while(n){n--;name=String.fromCharCode(65+n%26)+name;n=Math.floor(n/26)}
+ return name;
+}
+function crc32(bytes){
+ let crc=0xffffffff;
+ for(const byte of bytes){
+  crc^=byte;
+  for(let bit=0;bit<8;bit++)crc=(crc>>>1)^((crc&1)?0xedb88320:0);
+ }
+ return(crc^0xffffffff)>>>0;
+}
+function makeZip(files){
+ const encoder=new TextEncoder(),localParts=[],centralParts=[];
+ let offset=0;
+ const now=new Date(),time=(now.getHours()<<11)|(now.getMinutes()<<5)|Math.floor(now.getSeconds()/2);
+ const date=((Math.max(1980,now.getFullYear())-1980)<<9)|((now.getMonth()+1)<<5)|now.getDate();
+ for(const[path,content]of files){
+  const name=encoder.encode(path),data=encoder.encode(content),crc=crc32(data);
+  const local=new Uint8Array(30+name.length),lv=new DataView(local.buffer);
+  lv.setUint32(0,0x04034b50,true);lv.setUint16(4,20,true);lv.setUint16(6,0x0800,true);
+  lv.setUint16(8,0,true);lv.setUint16(10,time,true);lv.setUint16(12,date,true);
+  lv.setUint32(14,crc,true);lv.setUint32(18,data.length,true);lv.setUint32(22,data.length,true);
+  lv.setUint16(26,name.length,true);lv.setUint16(28,0,true);local.set(name,30);
+  localParts.push(local,data);
+  const central=new Uint8Array(46+name.length),cv=new DataView(central.buffer);
+  cv.setUint32(0,0x02014b50,true);cv.setUint16(4,20,true);cv.setUint16(6,20,true);
+  cv.setUint16(8,0x0800,true);cv.setUint16(10,0,true);cv.setUint16(12,time,true);cv.setUint16(14,date,true);
+  cv.setUint32(16,crc,true);cv.setUint32(20,data.length,true);cv.setUint32(24,data.length,true);
+  cv.setUint16(28,name.length,true);cv.setUint16(30,0,true);cv.setUint16(32,0,true);
+  cv.setUint16(34,0,true);cv.setUint16(36,0,true);cv.setUint32(38,0,true);cv.setUint32(42,offset,true);
+  central.set(name,46);centralParts.push(central);offset+=local.length+data.length;
+ }
+ const centralSize=centralParts.reduce((size,part)=>size+part.length,0);
+ const end=new Uint8Array(22),ev=new DataView(end.buffer);
+ ev.setUint32(0,0x06054b50,true);ev.setUint16(4,0,true);ev.setUint16(6,0,true);
+ ev.setUint16(8,files.length,true);ev.setUint16(10,files.length,true);
+ ev.setUint32(12,centralSize,true);ev.setUint32(16,offset,true);ev.setUint16(20,0,true);
+ const parts=[...localParts,...centralParts,end],size=parts.reduce((n,part)=>n+part.length,0),zip=new Uint8Array(size);
+ let position=0;
+ for(const part of parts){zip.set(part,position);position+=part.length}
+ return zip;
+}
+function exportExcel(){
+ const v={};ids.forEach(i=>v[i]=parseFloat($(i).value)||0);
+ const x=getResults(v),longBars=v.nv*v.N,stirrups=x.ne*v.N;
+ const rows=[
+  ['Reporte de varilla para columnas'],
+  ['Generado',new Date().toLocaleString('es-MX')],
+  [],
+  ['Datos de entrada'],
+  ['Ancho de columna (cm)',v.b],['Largo de columna (cm)',v.h],['Altura (m)',v.H],
+  ['Número de columnas',v.N],['Recubrimiento (cm)',v.r],['Desperdicio (%)',v.w],
+  ['Varilla longitudinal',`#${v.vd}`],['Área por varilla (cm²)',x.ab],
+  ['Cantidad de varillas por columna',v.nv],['Estribo',`#${v.ed}`],
+  ['Separación de estribos (cm)',v.s],['Longitud comercial (m)',v.L],['Precio por kg',v.pr],
+  [],
+  ['Resultados de cuantía'],
+  ['Estado',x.ok?'Cumple':'No cumple'],['Cuantía de acero (%)',x.q],
+  ['Área de sección (cm²)',x.at],['Acero mínimo (cm²)',x.amin],
+  ['Acero máximo (cm²)',x.amax],['Acero colocado (cm²)',x.as],
+  ['Varillas mínimas con esta medida',x.nmin],
+  [],
+  ['Materiales para comprar'],
+  ['Varillas longitudinales totales',longBars],['Longitud longitudinal (m)',x.ml],
+  ['Longitud longitudinal con desperdicio (m)',x.ml*x.k],
+  ['Piezas longitudinales comerciales',x.pz],['Perímetro del estribo con ganchos (cm)',x.ph],
+  ['Estribos por columna',x.ne],['Total de estribos',stirrups],
+  ['Varilla para estribos (m)',x.me],['Piezas de estribo comerciales',x.pe],
+  ['Peso total estimado (kg)',x.kg],
+  ['Costo estimado',v.pr>0?x.kg*v.pr:'No especificado: captura un precio por kg'],
+  [],
+  ['Nota','Cálculo referencial con cuantía del 1 % al 8 %. No sustituye el cálculo estructural de un ingeniero.'],
+  ['Nota de estribos','Perímetro por recubrimiento más 10 cm por gancho en cada extremo.']
+ ];
+ const sheetRows=rows.map((row,r)=>`<row r="${r+1}">${row.map((value,c)=>{
+  const ref=`${columnName(c+1)}${r+1}`;
+  return typeof value==='number'&&Number.isFinite(value)
+   ?`<c r="${ref}"><v>${Number(value.toFixed(4))}</v></c>`
+   :value===undefined||value===null||value===''
+    ?`<c r="${ref}"/>`
+    :`<c r="${ref}" t="inlineStr"><is><t>${xmlEscape(value)}</t></is></c>`;
+ }).join('')}</row>`).join('');
+ const files=[
+  ['[Content_Types].xml','<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/><Override PartName="/xl/worksheets/sheet1.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/></Types>'],
+  ['_rels/.rels','<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/></Relationships>'],
+  ['xl/workbook.xml','<?xml version="1.0" encoding="UTF-8" standalone="yes"?><workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><sheets><sheet name="Reporte" sheetId="1" r:id="rId1"/></sheets></workbook>'],
+  ['xl/_rels/workbook.xml.rels','<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet1.xml"/></Relationships>'],
+  ['xl/worksheets/sheet1.xml',`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><cols><col min="1" max="1" width="42" customWidth="1"/><col min="2" max="2" width="38" customWidth="1"/></cols><sheetData>${sheetRows}</sheetData></worksheet>`]
+ ];
+ const blob=new Blob([makeZip(files)],{type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'});
+ const url=URL.createObjectURL(blob),link=document.createElement('a');
+ link.href=url;link.download=`reporte-varilla-columnas-${new Date().toISOString().slice(0,10)}.xlsx`;
+ document.body.appendChild(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+function exportText(){
+ const v={};ids.forEach(i=>v[i]=parseFloat($(i).value)||0);
+ const x=getResults(v);
+ const report=[
+  'REPORTE DE VARILLA PARA COLUMNAS',
+  `Generado: ${new Date().toLocaleString('es-MX')}`,
+  '',
+  'DATOS DE ENTRADA',
+  `Columna: ${v.b} × ${v.h} cm; altura: ${v.H} m; cantidad: ${v.N}`,
+  `Recubrimiento: ${v.r} cm; desperdicio: ${v.w} %`,
+  `Varilla longitudinal: #${v.vd}; cantidad por columna: ${v.nv}`,
+  `Estribo: #${v.ed}; separación: ${v.s} cm`,
+  `Longitud comercial: ${v.L} m; precio por kg: ${v.pr||'No especificado'}`,
+  '',
+  'RESULTADOS DE CUANTIA',
+  `Estado: ${x.ok?'Cumple':'No cumple'}`,
+  `Cuantía de acero: ${f(x.q)} %`,
+  `Área de sección: ${f(x.at)} cm²`,
+  `Acero mínimo/máximo: ${f(x.amin)} / ${f(x.amax)} cm²`,
+  `Acero colocado: ${f(x.as)} cm²; mínimo de varillas: ${x.nmin}`,
+  '',
+  'MATERIAL A COMPRAR',
+  `Varilla longitudinal: ${f(x.ml)} m; con desperdicio: ${f(x.ml*x.k)} m`,
+  `Piezas longitudinales de ${f(v.L,0)} m: ${x.pz}`,
+  `Estribos por columna: ${x.ne}; longitud de estribos: ${f(x.me)} m`,
+  `Piezas comerciales para estribos: ${x.pe}`,
+  `Peso total estimado: ${f(x.kg)} kg`,
+  `Costo estimado: ${v.pr>0?'$'+f(x.kg*v.pr):'No especificado'}`,
+  '',
+  'Cálculo referencial; no sustituye el cálculo estructural de un ingeniero.'
+ ].join('\n');
+ const blob=new Blob(['\ufeff',report],{type:'text/plain;charset=utf-8'});
+ const url=URL.createObjectURL(blob),link=document.createElement('a');
+ link.href=url;link.download=`reporte-varilla-columnas-${new Date().toISOString().slice(0,10)}.txt`;
+ document.body.appendChild(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+try{const s=JSON.parse(localStorage.getItem('varilla')||'{}');ids.forEach(i=>{if(s[i]!==undefined&&s[i]!==0)$(i).value=s[i]})}catch(e){}
+ids.forEach(i=>$(i).addEventListener('input',calc));calc();
+const DEF={b:20,h:30,H:4,N:1,r:2.5,w:10,vd:4,nv:6,ed:2.5,s:20,L:12,pr:0};
+$('mn').onclick=()=>{$('nv').value=Math.max(4,(+$('nv').value||4)-1);calc()};
+$('pl').onclick=()=>{$('nv').value=(+$('nv').value||0)+1;calc()};
+$('rs').onclick=()=>{ids.forEach(i=>$(i).value=DEF[i]);calc()};
+$('ex').onclick=exportExcel;
+$('tx').onclick=exportText;
+$('th').onclick=()=>{const d=document.documentElement,dk=d.dataset.theme?d.dataset.theme==='dark':matchMedia('(prefers-color-scheme:dark)').matches;d.dataset.theme=dk?'light':'dark';try{localStorage.setItem('tema',d.dataset.theme)}catch(e){}};
+$('fs').disabled=!document.fullscreenEnabled;
+$('fs').onclick=async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else await document.documentElement.requestFullscreen()}catch(e){}};
+document.addEventListener('fullscreenchange',()=>{$('fs').textContent=document.fullscreenElement?'Salir de pantalla completa':'Pantalla completa'});
+try{const tm=localStorage.getItem('tema');if(tm)document.documentElement.dataset.theme=tm}catch(e){}
+$('cp').onclick=async()=>{const x='Columna '+$('b').value+'×'+$('h').value+' cm, '+$('H').value+' m, '+$('N').value+' pza\n'+$('res1').innerText+'\n'+$('res2').innerText;
+ try{if(navigator.share)await navigator.share({title:'Varilla para columnas',text:x});else{await navigator.clipboard.writeText(x);$('cp').textContent='Copiado'}}catch(e){}};
+let dp;addEventListener('beforeinstallprompt',e=>{e.preventDefault();dp=e;$('inst').hidden=false});
+$('inst').onclick=async()=>{dp.prompt();await dp.userChoice;$('inst').hidden=true};
+addEventListener('appinstalled',()=>{$('inst').hidden=true});
+if('serviceWorker'in navigator)addEventListener('load',()=>navigator.serviceWorker.register('sw.js'));
+</script></body></html>
