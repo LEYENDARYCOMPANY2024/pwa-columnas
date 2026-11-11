@@ -1,5 +1,5 @@
-const C='varilla-v7',WIDGET_TAG='varilla-columnas',WIDGET_DATA='./widgets/current.json';
-const F=['./','./index.html','./manifest.json','./icon-192.png','./icon-512.png','./widgets/card.json','./widgets/widget-data.json','./widgets/widget-preview.png'];
+const C='varilla-v8',WIDGET_TAG='varilla-columnas',WIDGET_DATA='./widgets/current.json';
+const F=['./','./index.html','./privacy.html','./manifest.json','./icon-192.png','./icon-512.png','./widgets/card.json','./widgets/widget-data.json','./widgets/widget-preview.png'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(C).then(c=>c.addAll(F)));self.skipWaiting()});
 self.addEventListener('activate',e=>{
  e.waitUntil(caches.match(new URL(WIDGET_DATA,self.location.href)).then(data=>{
